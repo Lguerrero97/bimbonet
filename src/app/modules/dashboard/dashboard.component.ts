@@ -155,15 +155,21 @@ export class DashboardComponent implements OnInit {
         this.users.push(updatedUser);
         this.messageService.add({ severity: 'success', summary: this.translate.instant('CRUD.SUCCESS'), detail: this.translate.instant('CRUD.USER_CREATE'), life: 3000 });
 
+
       } else if (this.modalMode === 'edit') {
         const index = this.users.findIndex(u => u.id === updatedUser.id);
         this.messageService.add({ severity: 'success', summary: this.translate.instant('CRUD.SUCCESS'), detail: this.translate.instant('CRUD.USER_UPDATE'), life: 3000 });
         if (index !== -1) this.users[index] = updatedUser;
+        this.showModal = false;
+        this.loadUsers();
+
       }
       this.saveUsers();
       this.applyFilter();
+    } else {
+      this.showModal = false;
+      this.loadUsers();
     }
-    this.showModal = false;
   }
 
   // Elimina uno o varios usuarios del arreglo y muestra un mensaje de confirmación

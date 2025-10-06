@@ -19,7 +19,7 @@
         </div>
         <div class="caption-actions margin-small">
            <button pButton type="button" icon="pi pi-star"  class="p-button-rounded p-button-sm p-button-success"
-            (click)="toggleDestacado(selectedUsers)" *ngIf="canEdit" label="{{'COMMON.OUTSTADING' | translate }}" ></button>
+            (click)="toggleDestacado(selectedUsers)" *ngIf="canEdit" label="{{'COMMON.OUTSTADING' | translate }}" style="background: rgb(74 169 109 / 96%) !important;;"></button>
           
             <button *ngIf="canDelete" pButton type="button" icon="pi pi-trash"  class="p-button-rounded p-button-sm p-button-danger"
             (click)="confirmDelete(selectedUsers)" label="{{'COMMON.DELETE_USER' | translate }}" ></button>

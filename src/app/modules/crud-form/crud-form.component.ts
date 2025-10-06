@@ -9,6 +9,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { InputMaskModule } from 'primeng/inputmask';
 import { User } from '../../core/models/user.model';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-crud-form',
@@ -22,7 +23,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CheckboxModule,
     GoogleMapsModule,
     InputMaskModule,
-    TranslateModule
+    TranslateModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './crud-form.component.html',
   styleUrls: ['./crud-form.component.scss']
@@ -46,7 +48,7 @@ export class CrudFormComponent implements OnInit {
     disableDoubleClickZoom: false,
     clickableIcons: true
   };
-
+  isLoading = false;
   private geocoder = new google.maps.Geocoder();
 
   constructor(private fb: FormBuilder) {
@@ -200,6 +202,7 @@ export class CrudFormComponent implements OnInit {
   save(): void {
     if (this.userForm.invalid) return;
     const f = this.userForm.value;
+    this.isLoading = true;
 
     // Combina teléfono + extensión en formato completo
     const phone = f.phone.replace(/\D/g, '');
@@ -219,6 +222,10 @@ export class CrudFormComponent implements OnInit {
       checked: this.user?.checked
     };
     this.close.emit(updatedUser);
+    this.initializeForm();
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1000);
   }
 
   // Cierra el modal sin guardar

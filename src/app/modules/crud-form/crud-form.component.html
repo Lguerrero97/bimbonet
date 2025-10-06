@@ -2,7 +2,7 @@
   header="{{ mode === 'add' ? ( 'CRUD.ADDUSER' | translate ) : mode === 'edit' ? ( 'CRUD.EDITUSER' | translate ) : ( 'CRUD.CONSULTUSER' | translate ) }}"
   [(visible)]="visible" [modal]="true" [closable]="true" [dismissableMask]="true" [draggable]="false"
   (onHide)="cancel()">
-  
+
   <form [formGroup]="userForm">
     <div class="form-grid">
       <div class="form-group">
@@ -16,7 +16,8 @@
       <div class="form-group">
         <label>{{ 'CRUD.USER' | translate }}</label>
         <input pInputText formControlName="username" />
-        <small class="text-danger" *ngIf="userForm.get('username')?.errors?.['required'] && userForm.get('username')?.touched">
+        <small class="text-danger"
+          *ngIf="userForm.get('username')?.errors?.['required'] && userForm.get('username')?.touched">
           {{ 'CRUD.REQUIRED' | translate }}
         </small>
       </div>
@@ -24,7 +25,8 @@
       <div class="form-group">
         <label>{{ 'CRUD.EMAIL' | translate }}</label>
         <input pInputText formControlName="email" />
-        <small class="text-danger" *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched">
+        <small class="text-danger"
+          *ngIf="userForm.get('email')?.errors?.['required'] && userForm.get('email')?.touched">
           {{ 'CRUD.REQUIRED' | translate }}
         </small>
       </div>
@@ -32,7 +34,8 @@
       <div class="form-group">
         <label>{{ 'CRUD.PHONE' | translate }}</label>
         <p-inputMask mask="(999) 999-9999" formControlName="phone"></p-inputMask>
-        <small class="text-danger" *ngIf="userForm.get('phone')?.errors?.['required'] && userForm.get('phone')?.touched">
+        <small class="text-danger"
+          *ngIf="userForm.get('phone')?.errors?.['required'] && userForm.get('phone')?.touched">
           {{ 'CRUD.REQUIRED' | translate }}
         </small>
         <small class="text-danger" *ngIf="userForm.get('phone')?.errors?.['pattern'] && userForm.get('phone')?.touched">
@@ -42,8 +45,9 @@
 
       <div class="form-group">
         <label>{{ 'CRUD.EXTENSION' | translate }}</label>
-        <input pInputText formControlName="extension" maxlength="10"  />
-        <small class="text-danger" *ngIf="userForm.get('extension')?.errors?.['pattern'] && userForm.get('extension')?.touched">
+        <input pInputText formControlName="extension" maxlength="10" />
+        <small class="text-danger"
+          *ngIf="userForm.get('extension')?.errors?.['pattern'] && userForm.get('extension')?.touched">
           {{ 'CRUD.INVALIDEXTENSION' | translate }}
         </small>
       </div>
@@ -76,8 +80,9 @@
       </div>
       <div class="form-group">
         <label>{{ 'CRUD.ZIPCODE' | translate }}</label>
-        <input pInputText formControlName="zipcode"/>
-        <small class="text-danger" *ngIf="userForm.get('address.zipcode')?.errors?.['pattern'] && userForm.get('address.zipcode')?.touched">
+        <input pInputText formControlName="zipcode" />
+        <small class="text-danger"
+          *ngIf="userForm.get('address.zipcode')?.errors?.['pattern'] && userForm.get('address.zipcode')?.touched">
           {{ 'CRUD.INVALIDZIPCODE' | translate }}
         </small>
       </div>
@@ -110,9 +115,12 @@
     <div class="button-bar" style="margin-top: 15px;">
       <button pButton label="{{ 'CRUD.CANCEL' | translate }}" icon="pi pi-times" class="p-button-text"
         (click)="cancel()" *ngIf="mode !== 'detail'"></button>
-      <button pButton 
+      <button pButton
         label="{{ mode === 'add'? ('CRUD.SAVE'  | translate): mode === 'edit'? ('CRUD.UPDATE'  | translate): ('COMMON.ACCEPT'  | translate) }}"
         icon="pi pi-check" [disabled]="userForm.invalid" (click)="save()"></button>
     </div>
   </form>
+  <div class="overlay-spiner" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
 </p-dialog>
