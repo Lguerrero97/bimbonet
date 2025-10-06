@@ -1,0 +1,242 @@
+.footer-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #004f9f, #005bb5);
+  color: #ffffff;
+  font-size: 14px;
+  padding: 12px 24px;
+  text-align: center;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.footer-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg, #004f9f, #005bb5);
+  color: #ffffff;
+  font-size: 14px;
+  padding: 12px 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.welcome-text {
+  font-weight: 500;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-buttons button {
+  margin-left: 8px;
+}
+
+.logo {
+  width: 50px;
+  margin-bottom: 1rem;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .logo {
+    height: 40px;
+  }
+
+  .welcome-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .p-dropdown {
+    background-color: white;
+    color: #333;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-banner {
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+
+  .footer-content {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-banner {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+}
+
+.app-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 100%;
+    background: url(/assets/img/backgound.jpg) no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.main-content {
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* Menú de escritorio */
+.desktop-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Icono hamburguesa */
+.mobile-menu-icon {
+  display: none;
+}
+
+/* Menú móvil oculto por defecto */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #004f9f, #005bb5);
+}
+
+/* Mostrar menú cuando está activo */
+.mobile-menu.show {
+  display: flex;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .desktop-menu {
+    display: none; /* Oculta menú de escritorio */
+  }
+  .mobile-menu-icon {
+    display: block; /* Muestra icono hamburguesa */
+  }
+}
+
+
+.navbar {
+  width: 100%;
+  background: linear-gradient(135deg, #004f9f, #005bb5);
+  color: #fff;
+  padding: 12px 24px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Logo y texto */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 40px;
+}
+
+.welcome-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Menú de escritorio */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: max-height 0.3s ease;
+}
+
+/* Botón hamburguesa oculto por defecto */
+.navbar-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Responsive: móvil */
+@media (max-width: 768px) {
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar-right {
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+  }
+
+  .navbar-right.open {
+    max-height: 500px; /* ajusta según el contenido */
+  }
+
+  .navbar-right button, .navbar-right .p-dropdown {
+    width: 100%;
+    margin: 5px 0;
+  }
+}

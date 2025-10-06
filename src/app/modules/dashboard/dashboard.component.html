@@ -1,0 +1,85 @@
+<main class="main-content">
+  <p-table #dt [value]="users" [(selection)]="selectedUsers" dataKey="id" [paginator]="true" [rows]="5"
+    [rowsPerPageOptions]="[5,10,20,50,100]" [loading]="loading" responsiveLayout="scroll" [scrollable]="true"
+    scrollHeight="400px" styleClass="responsive-table"
+    [globalFilterFields]="['name','username','email','phone','website','company.name','address.city']">
+
+    <ng-template pTemplate="caption">
+      <div class="caption-container">
+        <h3 class="dashboard-title">
+          <i class="pi pi-user icon"></i>
+          {{ 'DASHBOARD.TEXTUSERS' | translate }}
+        </h3>
+        <div class="caption-actions">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" placeholder="{{'DASHBOARD.SEARCH' | translate }}" [(ngModel)]="globalFilter"
+              (input)="dt.filterGlobal(globalFilter, 'contains')" />
+          </span>
+        </div>
+        <div class="caption-actions">
+           <button pButton type="button" icon="pi pi-star"  class="p-button-rounded p-button-sm p-button-success"
+            (click)="toggleDestacado(selectedUsers)" *ngIf="canEdit" label="{{'COMMON.OUTSTADING' | translate }}" ></button>
+          
+            <button *ngIf="canDelete" pButton type="button" icon="pi pi-trash"  class="p-button-rounded p-button-sm p-button-danger"
+            (click)="confirmDelete(selectedUsers)" label="{{'COMMON.DELETE_USER' | translate }}" ></button>
+         
+            <button *ngIf="canAdd" pButton type="button" icon="pi pi-plus" class="p-button-rounded p-button-sm p-button-primary"
+            (click)="openModal('add')" label="{{'CRUD.ADDUSER' | translate }}" ></button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:3rem"><p-tableHeaderCheckbox /></th>
+        <th pSortableColumn="id">{{'DASHBOARD.ID' | translate }} <p-sortIcon field="id" /></th>
+        <th pSortableColumn="name">{{'DASHBOARD.NAME' | translate }} <p-sortIcon field="name" /></th>
+        <th pSortableColumn="username">{{'DASHBOARD.USER' | translate }} <p-sortIcon field="username" /></th>
+        <th pSortableColumn="email">{{'DASHBOARD.EMAIL' | translate }} <p-sortIcon field="email" /></th>
+        <th pSortableColumn="phone">{{'DASHBOARD.PHONE' | translate }} <p-sortIcon field="phone" /></th>
+        <th pSortableColumn="website">{{'DASHBOARD.WEBSITE' | translate }} <p-sortIcon field="website" /></th>
+        <th pSortableColumn="company.name">{{'DASHBOARD.COMPANY' | translate }} <p-sortIcon field="company.name" /></th>
+        <th pSortableColumn="address.city">{{'DASHBOARD.CITY' | translate }} <p-sortIcon field="address.city" /></th>
+        <th pSortableColumn="destacado">{{'DASHBOARD.OUTSTADING' | translate }} <p-sortIcon field="destacado" /></th>
+        <th>{{'DASHBOARD.ACCIONS' | translate }}</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user>
+      <tr [ngClass]="{ 'highlighted-row': user.destacado }">
+        <td><p-tableCheckbox [value]="user" /></td>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.website }}</td>
+        <td>{{ user.company?.name }}</td>
+        <td>{{ user.address?.city }}</td>
+        <td style="text-align: center;">
+          <p-tag [value]="user.destacado ? ('DASHBOARD.YES' | translate) : ('DASHBOARD.NO' | translate)"
+            [severity]="user.destacado ? 'success' : 'info'"></p-tag>
+        </td>
+        <td class="actions-cell">
+          <button pButton type="button" icon="pi pi-star" class="style-btn p-button-success"
+             [class.p-button-outlined]="!user.destacado" (click)="toggleDestacado(user)" *ngIf="canEdit"></button>
+            
+          <button *ngIf="canEdit" pButton type="button" icon="pi pi-pencil" class="p-button-info style-btn"
+            (click)="openModal('edit', user)"></button>
+          <button *ngIf="canDelete" pButton type="button" icon="pi pi-trash" class="p-button-danger style-btn"
+            (click)="confirmDelete(user)"></button>
+          <button pButton type="button" icon="pi pi-eye" class="p-button-secondary style-btn"
+            (click)="openModal('detail', user)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <ng-container *ngIf="showModal">
+    <app-crud-form [visible]="showModal" [mode]="modalMode" [user]="selectedUser" (close)="closeModal($event)">
+    </app-crud-form>
+  </ng-container>
+</main>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>

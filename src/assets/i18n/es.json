@@ -1,0 +1,87 @@
+{
+  "HEADER": {
+    "WELCOME": "Bienvenido",
+    "LOGOUT": "Cerrar sesión",
+    "SELECT_LANG": "Selecciona idioma",
+    "HOME": "Inicio",
+    "FOOTERTEXT": "© 2025 Portal Administrativo. Todos los derechos reservados. | Términos y Condiciones | Política de Privacidad",
+    "LANGUAGE": {
+      "ES": "Español",
+      "EN": "Inglés"
+    },
+    "MSJ_ERROR_LOGIN": "Usuario o contraseña incorrectos",
+    "MSJ_SUCCES_LOGIN": "Sesión iniciada exitosamente"
+  },
+  "LOGIN": {
+    "TITLE": "Iniciar sesión",
+    "USERNAME": "Usuario",
+    "PASSWORD": "Contraseña",
+    "BUTTON": "Entrar",
+    "TEXTTITLE": "Portal Administrativo",
+    "TEXTMENSAGGE": "Gestiona usuarios, roles y registros fácilmente."
+  },
+  "DASHBOARD": {
+    "TEXTUSERS": "Usuarios",
+    "ID": "ID",
+    "NAME": "NOMBRE",
+    "USER": "USUARIO",
+    "EMAIL": "CORREO",
+    "PHONE": "TELÉFONO",
+    "WEBSITE": "SITIO WEB",
+    "COMPANY": "COMPAÑÍA",
+    "CITY": "CIUDAD",
+    "OUTSTADING": "DESTACADO",
+    "ACCIONS": "ACCIONES",
+    "SEARCH": "Buscar",
+    "YES": "Si",
+    "NO": "No",
+    "MSJ_DELETE_CONFIRM_ARRAY": "¿Seguro que deseas eliminar los registros?",
+    "MSJ_DELETE_CONFIRM": "¿Seguro que deseas eliminar el registro?",
+    "MSJ_DELETE_SUCCES_ARRAY": "Registros Eliminados Exitosamente.",
+    "MSJ_DELETE_SUCCES": "Registro Eliminado Exitosamente."
+  },
+  "CRUD": {
+    "ADDUSER": "Agregar Usuario",
+    "EDITUSER": "Editar Usuario",
+    "CONSULTUSER": "Detalle del Usuario",
+    "NAME": "Nombre",
+    "USER": "Usuario",
+    "EMAIL": "Correo",
+    "PHONE": "Teléfono",
+    "WEBSITE": "Sitio Web",
+    "COMPANY": "Compañía",
+    "STREAT": "Calle",
+    "NUMBER": "Número",
+    "CITY": "Ciudad",
+    "ZIPCODE": "Código Postal",
+    "LATITUDE": "Latitud",
+    "LONGITUDE": "Longitud",
+    "OUTSTADING": "Destacado",
+    "CANCEL": "Cancelar",
+    "SAVE": "Guardar",
+    "UPDATE": "Actualizar",
+    "MAP": "Mapa",
+    "SATELLITE": "SatéLite",
+    "REQUIRED": "El campo es requerido",
+    "INVALIDPHONE": "Formato inválido, debe ser (999) 999-9999",
+    "INVALIDZIPCODE": "Formato inválido, debe ser 5 digitos",
+    "USER_UPDATE":"Usuario actualizado exitosamente",
+    "USER_CREATE":"Usuario creado exitosamente",
+    "EXTENSION":"Extensión",
+    "INVALIDEXTENSION": "Extensión invalida"
+
+  },
+  "COMMON": {
+    "TITLE_CONFIRM": "Confirmación",
+    "SUCCESS": "Éxito",
+    "ERROR": "Error",
+    "WARNING": "Advertencia",
+    "INFO": "Información",
+    "YES": "Sí",
+    "NO": "No",
+    "CANCEL": "Cancelar",
+    "ACCEPT": "Aceptar",
+    "OUTSTADING": "Destacar usuarios",
+    "DELETE_USER": "Eliminar usuarios"
+  }
+}

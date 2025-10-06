@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Juan Lopez",
+    "username": "jLopez",
+    "email": "jlopez@grupobimbo.com",
+    "password": "123!*",
+    "role": "manager"
+  },
+  {
+    "id": 2,
+    "name": "Daniela Rodriguez",
+    "username": "dRodriguez",
+    "email": "drodriguez@grupobimbo.com",
+    "password": "124!*",
+    "role": "coordinator"
+  }
+]
