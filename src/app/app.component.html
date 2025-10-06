@@ -2,7 +2,6 @@
   <!-- Header / Navbar -->
   <header class="navbar">
     <div class="navbar-container">
-      <!-- Logo y texto de bienvenida -->
       <div class="navbar-left">
         <img src="assets/img/image.png" alt="Bimbo" class="logo" />
         <span class="welcome-text">
@@ -10,12 +9,10 @@
         </span>
       </div>
 
-      <!-- Icono hamburguesa para móvil -->
       <div class="navbar-toggle" (click)="toggleMenu()">
         <i class="pi pi-bars"></i>
       </div>
 
-      <!-- Menú derecho -->
       <div class="navbar-right" [class.open]="menuOpen">
         <p-dropdown
           [options]="translatedLanguages"

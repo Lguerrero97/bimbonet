@@ -130,19 +130,16 @@
   justify-content: center;
 }
 
-/* Menú de escritorio */
 .desktop-menu {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-/* Icono hamburguesa */
 .mobile-menu-icon {
   display: none;
 }
 
-/* Menú móvil oculto por defecto */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -151,18 +148,16 @@
   background: linear-gradient(135deg, #004f9f, #005bb5);
 }
 
-/* Mostrar menú cuando está activo */
 .mobile-menu.show {
   display: flex;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .desktop-menu {
-    display: none; /* Oculta menú de escritorio */
+    display: none; 
   }
   .mobile-menu-icon {
-    display: block; /* Muestra icono hamburguesa */
+    display: block; 
   }
 }
 
@@ -186,7 +181,6 @@
   flex-wrap: wrap;
 }
 
-/* Logo y texto */
 .navbar-left {
   display: flex;
   align-items: center;
@@ -202,7 +196,6 @@
   font-weight: 500;
 }
 
-/* Menú de escritorio */
 .navbar-right {
   display: flex;
   align-items: center;
@@ -210,14 +203,12 @@
   transition: max-height 0.3s ease;
 }
 
-/* Botón hamburguesa oculto por defecto */
 .navbar-toggle {
   display: none;
   font-size: 1.5rem;
   cursor: pointer;
 }
 
-/* Responsive: móvil */
 @media (max-width: 768px) {
   .navbar-toggle {
     display: block;
@@ -232,7 +223,7 @@
   }
 
   .navbar-right.open {
-    max-height: 500px; /* ajusta según el contenido */
+    max-height: 500px; 
   }
 
   .navbar-right button, .navbar-right .p-dropdown {

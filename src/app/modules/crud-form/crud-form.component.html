@@ -4,7 +4,6 @@
   (onHide)="cancel()">
   
   <form [formGroup]="userForm">
-    <!-- Datos principales -->
     <div class="form-grid">
       <div class="form-group">
         <label>{{ 'CRUD.NAME' | translate }}</label>
@@ -41,7 +40,6 @@
         </small>
       </div>
 
-      <!-- Campo de extensión -->
       <div class="form-group">
         <label>{{ 'CRUD.EXTENSION' | translate }}</label>
         <input pInputText formControlName="extension" maxlength="10"  />
@@ -63,7 +61,6 @@
       </div>
     </div>
 
-    <!-- Dirección -->
     <div formGroupName="address" class="form-grid" style="margin-top: 10px;">
       <div class="form-group">
         <label>{{ 'CRUD.STREAT' | translate }}</label>
@@ -97,7 +94,6 @@
       </div>
     </div>
 
-    <!-- Mapa -->
     <div class="map-container" style="height: 300px; margin-top: 10px;">
       <google-map height="100%" width="100%" [center]="center" [zoom]="zoom" [options]="mapOptions"
         (mapClick)="onMapClick($event)">
@@ -107,12 +103,10 @@
       </google-map>
     </div>
 
-    <!-- Destacado -->
     <div class="form-group" style="margin-top:10px;">
       <p-checkbox formControlName="destacado" label="{{ 'CRUD.OUTSTADING' | translate }}" [binary]="true"></p-checkbox>
     </div>
 
-    <!-- Botones -->
     <div class="button-bar" style="margin-top: 15px;">
       <button pButton label="{{ 'CRUD.CANCEL' | translate }}" icon="pi pi-times" class="p-button-text"
         (click)="cancel()" *ngIf="mode !== 'detail'"></button>

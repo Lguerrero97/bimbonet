@@ -38,7 +38,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   providers: [MessageService, ConfirmationService]
-
 })
 export class DashboardComponent implements OnInit {
 
@@ -59,6 +58,7 @@ export class DashboardComponent implements OnInit {
 
   pageIndex = 0;
   pageSize = 5;
+
   constructor(
     private authService: AuthService,
     private usersService: UserService,
@@ -66,7 +66,6 @@ export class DashboardComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private translate: TranslateService
-
   ) { }
 
   ngOnInit(): void {
@@ -74,6 +73,7 @@ export class DashboardComponent implements OnInit {
     this.loadUsers();
   }
 
+  // Carga los permisos dependiendo del rol del usuario logueado
   private loadPermissions(): void {
     const user: UserAdmin | null = this.authService.getCurrentUser();
     const role = user?.role?.toLowerCase();
@@ -82,6 +82,8 @@ export class DashboardComponent implements OnInit {
     this.canDelete = role === 'manager';
   }
 
+  // Carga los usuarios, primero intenta obtenerlos del localStorage,
+  // si no existen, los obtiene desde la API y los guarda localmente
   private loadUsers(): void {
     const saved = this.storageService.getItem('users');
     if (saved) {
@@ -91,6 +93,7 @@ export class DashboardComponent implements OnInit {
     } else {
       this.usersService.getUsers().subscribe({
         next: (data: User[]) => {
+          // Agrego la propiedad 'destacado' manualmente para control interno
           this.users = data.map(u => ({ ...u, destacado: false }));
           this.filteredUsers = [...this.users];
           this.loading = false;
@@ -104,10 +107,12 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  // Guarda los usuarios actualizados en localStorage
   private saveUsers(): void {
     this.storageService.setItem('users', JSON.stringify(this.users));
   }
 
+  // Alterna el estado de "destacado" de un usuario o varios
   toggleDestacado(user: User | User[]): void {
     if (Array.isArray(user)) {
       user.forEach(u => u.destacado = !u.destacado);
@@ -117,6 +122,7 @@ export class DashboardComponent implements OnInit {
     this.saveUsers();
   }
 
+  // Filtra los usuarios según el texto ingresado en el buscador global
   applyFilter(): void {
     const filter = this.globalFilter.toLowerCase();
     this.filteredUsers = this.users.filter(user =>
@@ -131,6 +137,7 @@ export class DashboardComponent implements OnInit {
     this.pageIndex = 0;
   }
 
+  // Abre el modal en el modo indicado (add, edit, detail)
   openModal(mode: 'add' | 'edit' | 'detail', user: User | null = null): void {
     this.modalMode = mode;
     this.selectedUser = user
@@ -139,9 +146,11 @@ export class DashboardComponent implements OnInit {
     this.showModal = true;
   }
 
+  // Cierra el modal y actualiza los datos si el usuario fue modificado o agregado
   closeModal(updatedUser: User | null): void {
     if (updatedUser) {
       if (this.modalMode === 'add') {
+        // Asigna un nuevo ID incremental
         updatedUser.id = this.users.length ? Math.max(...this.users.map(u => u.id)) + 1 : 1;
         this.users.push(updatedUser);
         this.messageService.add({ severity: 'success', summary: this.translate.instant('CRUD.SUCCESS'), detail: this.translate.instant('CRUD.USER_CREATE'), life: 3000 });
@@ -157,6 +166,7 @@ export class DashboardComponent implements OnInit {
     this.showModal = false;
   }
 
+  // Elimina uno o varios usuarios del arreglo y muestra un mensaje de confirmación
   deleteUser(user: User | User[], res: any, isArray: any): void {
     let wasDeleted = false;
     if (!this.canDelete) return;
@@ -170,10 +180,12 @@ export class DashboardComponent implements OnInit {
     } else {
       this.users = this.users.filter(u => u.id !== user.id);
       wasDeleted = true;
-
     }
+
     this.saveUsers();
     this.applyFilter();
+
+    // Muestra mensaje de éxito con traducción dinámica
     if (wasDeleted) {
       this.messageService.add({
         severity: 'success',
@@ -184,10 +196,11 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-
+  // Lanza el cuadro de confirmación antes de eliminar usuarios
   confirmDelete(user: User | User[]) {
     const isArray = Array.isArray(user);
 
+    // Uso de ngx-translate para obtener todos los textos dinámicamente
     this.translate.get([
       isArray ? 'DASHBOARD.MSJ_DELETE_CONFIRM_ARRAY' : 'DASHBOARD.MSJ_DELETE_CONFIRM',
       isArray ? 'DASHBOARD.MSJ_DELETE_SUCCES_ARRAY' : 'DASHBOARD.MSJ_DELETE_SUCCES',
@@ -206,6 +219,5 @@ export class DashboardComponent implements OnInit {
         }
       });
     });
-
   }
 }

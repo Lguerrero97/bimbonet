@@ -34,36 +34,48 @@ import { MessageService } from 'primeng/api';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   providers: [MessageService]
-
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   error = '';
   isLoading = true;
 
-  constructor(private fb: FormBuilder, public authService: AuthService, private router: Router, private messageService: MessageService, private translate: TranslateService) {
+  constructor(
+    private fb: FormBuilder,
+    public authService: AuthService,
+    private router: Router,
+    private messageService: MessageService,
+    private translate: TranslateService
+  ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+
     setTimeout(() => {
       this.isLoading = false;
     }, 1000);
   }
+
   ngOnInit(): void {
-    this.authService.logout()
+    // Cierra sesión automáticamente al cargar el componente por seguridad
+    this.authService.logout();
   }
 
   submit() {
+    // Si el formulario es inválido, no se continúa
     if (this.loginForm.invalid) return;
+
     const { username, password } = this.loginForm.value;
     this.isLoading = true;
+
+    // Se realiza el login mediante el servicio AuthService
     this.authService.login(username, password).subscribe(user => {
       if (user) {
         this.showMensage('success', 'Success', this.translate.instant('HEADER.MSJ_SUCCES_LOGIN'));
         setTimeout(() => {
           this.isLoading = false;
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/dashboard']); 
         }, 1000);
       } else {
         this.isLoading = false;
@@ -72,6 +84,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // Método centralizado para mostrar mensajes tipo Toast
   showMensage(severity: string, summary: string, info: string) {
     this.messageService.add({ severity: severity, summary: summary, detail: info, life: 3000 });
   }
