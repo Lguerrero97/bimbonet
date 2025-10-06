@@ -3,10 +3,11 @@
   <header class="navbar">
     <div class="navbar-container">
       <div class="navbar-left">
-        <img src="assets/img/image.png" alt="Bimbo" class="logo" />
-        <span class="welcome-text">
-          {{ 'HEADER.WELCOME' | translate }} {{ authService.getCurrentUser()?.name }}
-        </span>
+        <span *ngIf="authService.getCurrentUser()" style="display: flex;">
+          <img src="assets/img/image.png" alt="Bimbo" class="logo" />
+          <span class="welcome-text">
+            {{ 'HEADER.WELCOME' | translate }} {{ authService.getCurrentUser()?.name }}
+          </span></span>
       </div>
 
       <div class="navbar-toggle" (click)="toggleMenu()">
@@ -14,31 +15,17 @@
       </div>
 
       <div class="navbar-right" [class.open]="menuOpen">
-        <p-dropdown
-          [options]="translatedLanguages"
-          [(ngModel)]="currentLang"
-          optionLabel="label"
-          optionValue="code"
-          (onChange)="changeLanguage($event.value)"
-          [showClear]="false">
+        <p-dropdown [options]="translatedLanguages" [(ngModel)]="currentLang" optionLabel="label" optionValue="code"
+          (onChange)="changeLanguage($event.value)" [showClear]="false">
         </p-dropdown>
 
-        <button
-          pButton
-          label="{{ 'HEADER.HOME' | translate }}"
-          icon="pi pi-home"
-          class="p-button-rounded p-button-sm p-button-primary"
-          routerLink="/dashboard"
+        <button pButton label="{{ 'HEADER.HOME' | translate }}" icon="pi pi-home"
+          class="p-button-rounded p-button-sm p-button-primary" routerLink="/dashboard"
           *ngIf="authService.getCurrentUser()">
         </button>
 
-        <button
-          pButton
-          label="{{ 'HEADER.LOGOUT' | translate }}"
-          icon="pi pi-sign-out"
-          class="p-button-rounded p-button-sm p-button-danger"
-          (click)="logout()"
-          *ngIf="authService.getCurrentUser()">
+        <button pButton label="{{ 'HEADER.LOGOUT' | translate }}" icon="pi pi-sign-out"
+          class="p-button-rounded p-button-sm p-button-danger" (click)="logout()" *ngIf="authService.getCurrentUser()">
         </button>
       </div>
     </div>
