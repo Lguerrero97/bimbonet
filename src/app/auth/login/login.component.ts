@@ -29,7 +29,7 @@ import { MessageService } from 'primeng/api';
     TranslateModule,
     MatProgressSpinnerModule,
     RippleModule,
-    ToastModule
+    ToastModule 
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
