@@ -3,18 +3,20 @@ import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { User } from '../models/user.model';
 import { StorageService } from './local-storage.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private storageKey = 'users';
-
-  constructor(private http: HttpClient, private storage: StorageService) { }
+private platformId!: Object
+  constructor(private http: HttpClient, private storage: StorageService, ) { }
 
   getUsers(): Observable<User[]> {
     const saved = this.storage.getItem(this.storageKey);
     if (saved) return of(JSON.parse(saved));
+  if (isPlatformBrowser(this.platformId)) {
 
     return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users').pipe(
       map(users => {
@@ -22,6 +24,9 @@ export class UserService {
         return users;
       })
     );
+  }else{
+    return of([])
+  }
   }
 
    saveUsers(users: User[]) {
