@@ -15,7 +15,7 @@ private platformId!: Object
   login(username: string, password: string): Observable<UserAdmin | null> {
     if (isPlatformBrowser(this.platformId)) {
 
-      return this.http.get<UserAdmin[]>('assets/users.json').pipe(
+      return this.http.get<UserAdmin[]>('https://gist.githubusercontent.com/Lguerrero97/a5056368f22cd7d34c76f9156b55a42c/raw/23fb1ce517ec0e4fbe3e8f99b4c29dbf5e3da69d/users.json?').pipe(
         map(usersAdmin => {
           let existUsers = this.storage.getItem<UserAdmin>('adminUsers');
           if (!existUsers) {
