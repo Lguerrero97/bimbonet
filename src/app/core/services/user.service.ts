@@ -16,7 +16,7 @@ private platformId!: Object
   getUsers(): Observable<User[]> {
     const saved = this.storage.getItem(this.storageKey);
     if (saved) return of(JSON.parse(saved));
-  if (isPlatformBrowser(this.platformId)) {
+
 
     return this.http.get<User[]>('https://jsonplaceholder.typicode.com/users').pipe(
       map(users => {
@@ -24,9 +24,7 @@ private platformId!: Object
         return users;
       })
     );
-  }else{
-    return of([])
-  }
+
   }
 
    saveUsers(users: User[]) {
