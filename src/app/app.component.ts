@@ -75,8 +75,9 @@ export class AppComponent implements AfterViewInit {
   changeLanguage(lang: string) {
     this.currentLang = lang;
     this.translate.use(lang);
-    localStorage.setItem('lang', lang);
-
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('lang', lang);
+    }
     // Cargar Google Maps con el idioma seleccionado
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCEJvaZfQVcaGB1OkFGUT7QHVOFNRnXMsE&language=${lang}`;
